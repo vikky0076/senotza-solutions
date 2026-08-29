@@ -48,23 +48,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [firebaseUser, setFirebaseUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
-      if (fbUser) {
-        setFirebaseUser(fbUser);
-        setUser({
-          uid: fbUser.uid,
-          email: fbUser.email,
-          displayName: fbUser.displayName,
-          photoURL: fbUser.photoURL,
-        });
-      } else {
-        setFirebaseUser(null);
-        setUser(null);
-      }
-      setLoading(false);
-    });
+    try {
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (fbUser) => {
+          if (fbUser) {
+            setFirebaseUser(fbUser);
+            setUser({
+              uid: fbUser.uid,
+              email: fbUser.email,
+              displayName: fbUser.displayName,
+              photoURL: fbUser.photoURL,
+            });
+          } else {
+            setFirebaseUser(null);
+            setUser(null);
+          }
+          setLoading(false);
+        },
+        (error) => {
+          console.warn("Firebase auth error:", error);
+          setLoading(false);
+        }
+      );
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    } catch (err) {
+      console.warn("Firebase auth initialization error:", err);
+      setLoading(false);
+    }
   }, []);
 
   const getAuthToken = (): string | null => {
