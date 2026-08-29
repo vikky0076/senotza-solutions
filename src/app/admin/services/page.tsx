@@ -1,0 +1,21 @@
+"use client";
+
+export default function ServicesPage() {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-heading font-bold text-white">Services</h1>
+          <p className="text-zinc-400 mt-1">Manage public service offerings.</p>
+        </div>
+        <button className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">
+          Add Service
+        </button>
+      </div>
+
+      <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-8 text-center">
+        <p className="text-zinc-400">Services CRUD interface placeholder.</p>
+      </div>
+    </div>
+  );
+}
