@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, User, LogOut, LayoutDashboard, Shield } from "lucide-react";
+import { User, LogOut, LayoutDashboard, Shield } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -150,14 +150,41 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle — Animated Hamburger to X */}
           <button
-            className="md:hidden text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <div className="relative w-6 h-5 flex flex-col justify-between">
+              {/* Top line */}
+              <span
+                className="block w-full h-[2.5px] bg-white rounded-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] origin-center"
+                style={{
+                  transform: mobileMenuOpen
+                    ? "translateY(9px) rotate(45deg)"
+                    : "translateY(0) rotate(0)",
+                }}
+              />
+              {/* Middle line */}
+              <span
+                className="block w-full h-[2.5px] bg-white rounded-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                style={{
+                  opacity: mobileMenuOpen ? 0 : 1,
+                  transform: mobileMenuOpen ? "scaleX(0)" : "scaleX(1)",
+                }}
+              />
+              {/* Bottom line */}
+              <span
+                className="block w-full h-[2.5px] bg-white rounded-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] origin-center"
+                style={{
+                  transform: mobileMenuOpen
+                    ? "translateY(-9px) rotate(-45deg)"
+                    : "translateY(0) rotate(0)",
+                }}
+              />
+            </div>
           </button>
         </div>
       </motion.nav>

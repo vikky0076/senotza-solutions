@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import AnimatedText from "@/components/animations/AnimatedText";
 
 export default function Founder() {
@@ -17,13 +18,15 @@ export default function Founder() {
             className="lg:col-span-2 relative"
           >
             <div className="aspect-[3/4] rounded-2xl bg-gradient-to-b from-white/5 to-white/0 border border-white/10 overflow-hidden relative">
-              {/* Placeholder for founder image */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="flex flex-col items-center">
-                  <span className="font-heading text-8xl font-bold text-white/10">V</span>
-                  <span className="text-white/30 mt-4 font-mono text-sm">Founder</span>
-                </div>
-              </div>
+              {/* Founder image */}
+              <Image
+                src="/founder.png"
+                alt="Vignesh - Founder of SENOTZA Solutions"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                priority
+              />
               {/* Subtle gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             </div>

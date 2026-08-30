@@ -1,12 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import AnimatedText from "@/components/animations/AnimatedText";
 
 export default function About() {
   return (
-    <section className="relative w-full py-32 bg-background overflow-hidden rounded-t-3xl shadow-[0_-12px_40px_rgba(0,0,0,0.35)]" id="about">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section className="relative w-full py-32 overflow-hidden" id="about">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero-office.jpg"
+          alt="Modern office workspace — Senotza Solutions"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-background/85" />
+      </div>
+
+      {/* Content — above the background */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-32">
           <div>
@@ -64,19 +79,22 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="group relative p-8 md:p-10 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-colors duration-500"
+              className="group rounded-[20px] p-[2px] transition-all duration-300 hover:shadow-[0px_0px_30px_1px_rgba(0,255,117,0.30)] border border-white/10 hover:border-transparent"
+              style={{ background: "transparent" }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundImage = "linear-gradient(163deg, #00ff75 0%, #3700ff 100%)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundImage = "none"; }}
             >
-              <span className="text-primary/60 font-mono text-sm tracking-widest uppercase">
-                {item.label}
-              </span>
-              <h3 className="text-2xl font-heading font-bold text-white mt-4">
-                {item.title}
-              </h3>
-              <p className="text-white/60 mt-4 leading-relaxed">
-                {item.text}
-              </p>
-              {/* Corner accent */}
-              <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-white/10 rounded-tr-2xl group-hover:border-primary/30 transition-colors duration-500" />
+              <div className="relative p-8 md:p-10 rounded-[18px] bg-[#1a1a1a] transition-all duration-200 group-hover:scale-[0.98] group-hover:rounded-[20px] h-full">
+                <span className="text-primary/60 font-mono text-sm tracking-widest uppercase">
+                  {item.label}
+                </span>
+                <h3 className="text-2xl font-heading font-bold text-white mt-4">
+                  {item.title}
+                </h3>
+                <p className="text-white/60 mt-4 leading-relaxed">
+                  {item.text}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

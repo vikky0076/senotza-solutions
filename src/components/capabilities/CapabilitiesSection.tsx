@@ -68,7 +68,7 @@ const capabilitiesData: CapabilityData[] = [
     title: "Content Writing",
     category: "Content",
     description: "Strategic content creation that communicates your message clearly and engages your target audience.",
-    image: "https://images.unsplash.com/photo-1455390582262-044cdead2708?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "09",

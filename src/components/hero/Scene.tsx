@@ -5,13 +5,23 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, MeshDistortMaterial, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 
+// Suppress the THREE.Clock deprecation warning from @react-three/fiber internals
+// R3F v9 still uses Clock internally; this will be fixed in a future R3F release
+const _origWarn = console.warn;
+console.warn = (...args: unknown[]) => {
+  if (typeof args[0] === "string" && args[0].includes("THREE.Clock")) return;
+  _origWarn.apply(console, args);
+};
+
 function AbstractShape({ isMobile, reducedMotion }: { isMobile: boolean; reducedMotion: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const timeRef = useRef(0);
 
-  useFrame((state) => {
+  useFrame((_state, delta) => {
     if (meshRef.current && !reducedMotion) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * (isMobile ? 0.1 : 0.2);
-      meshRef.current.rotation.y = state.clock.elapsedTime * (isMobile ? 0.15 : 0.3);
+      timeRef.current += delta;
+      meshRef.current.rotation.x = timeRef.current * (isMobile ? 0.1 : 0.2);
+      meshRef.current.rotation.y = timeRef.current * (isMobile ? 0.15 : 0.3);
     }
   });
 
