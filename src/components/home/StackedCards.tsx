@@ -73,7 +73,6 @@ const Card = ({ feature, i, progress, range, targetScale }: CardProps) => {
   return (
     <div ref={containerRef} className="h-screen flex items-center justify-center sticky top-0 py-6">
       <motion.div
-        style={{ scale, top: `calc(-5vh + ${i * 25}px)` }}
         className="relative w-full max-w-5xl rounded-[20px] p-[2px] transform-gpu transition-all duration-300 hover:shadow-[0px_0px_30px_1px_rgba(0,255,117,0.30)] group border border-white/10 hover:border-transparent"
         style={{ background: "transparent", scale, top: `calc(-5vh + ${i * 25}px)` }}
         onMouseEnter={(e) => { e.currentTarget.style.backgroundImage = "linear-gradient(163deg, #00ff75 0%, #3700ff 100%)"; }}
